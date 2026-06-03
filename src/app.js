@@ -2,9 +2,8 @@ require('dotenv').config();
 const express = require('express');
 const sequelize = require('../Config/database');
 
-const { Usuario, Estacion, Reserva } = require('./models/asociasiones');
+const { Usuario, Estacion, Reserva } = require('./models/asociaciones');
 
-const { start } = require('node:repl');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -14,7 +13,7 @@ app.use(express.json());
 async function startServer() {
     try {
         console.log('Conectandose a la BD...')
-        await sequelize.sync({ alert:true });
+        await sequelize.sync({ alter:true });
         console.log('Modelos se actualizaron correctamente');
 
         app.listen(PORT, () => {

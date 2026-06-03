@@ -3,6 +3,8 @@
 const {DataTypes} = require('sequelize');
 const sequelize = require('../../Config/database');
 
+const Reserva = require('./Reserva');
+
 const Usuario = sequelize.define('Usuario', {
     id_usuario: {
         type: DataTypes.UUID,
@@ -25,11 +27,11 @@ const Usuario = sequelize.define('Usuario', {
         type: DataTypes.STRING(20),
         allowNull: true
     },
-    constrasenna: {
+    contrasenna: {
         type: DataTypes.STRING(100),
         allowNull: true
     },
-    cuidad: {
+    ciudad: {
         type: DataTypes.STRING(50),
         allowNull: true
     },
@@ -37,11 +39,21 @@ const Usuario = sequelize.define('Usuario', {
         type: DataTypes.BOOLEAN,
         defaultValue: true
     },
-    Delete:{
-        type: DataTypes.DATE,
-        allowNull: true
+},
+{    
+    hooks:{
+        afterDestroy: async(Usuario, options)=>{
+            if(Usuario.isActive === false){
+
+            await Reserva.destroy({
+                    where: { id_usuario: Usuario.id_usuario},
+                    transaction: options.transaction
+                });
+            }
+        },
     }
-}, {
+},
+ {
         timestamps: true,
         paranoid: true, // Crear el campo deleted_at
         tableName: 'usuarios' // En plural y en minusculas

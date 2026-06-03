@@ -19,6 +19,10 @@ const Reserva = sequelize.define('Reserva', {
         type: DataTypes.UUID,
         allowNull: false
     },
+    id_conector: {
+        type: DataTypes.UUID,
+        allowNull: false
+    },
     fecha_reserva: {
         type: DataTypes.DATE,
         allowNull: false
@@ -29,7 +33,7 @@ const Reserva = sequelize.define('Reserva', {
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    isActive: {
+    estado: {
         type: DataTypes.BOOLEAN,
         defaultValue: true
     },total_pagar: {

@@ -6,11 +6,15 @@ const Reserva = require('./Reserva');
 const Conector = require('./Conector');
 
 
-Usuario.hasMany(Reserva, { foreignKey: 'id_usuario', as: 'reservas' });
-Reserva.belongsTo(Usuario, { foreignKey: 'id_usuario', as: 'usuario' });
+
+
 
 Estacion.hasMany(Reserva, { foreignKey: 'id_estacion', as: 'reservas' });
 Reserva.belongsTo(Estacion, { foreignKey: 'id_estacion', as: 'estacion' });
+
+
+Conector.belongsToMany(Usuario, { through: 'Reserva', foreignKey: 'id_conector' });
+Usuario.belongsToMany(Conector, { through: 'Reserva', foreignKey: 'id_usuario' });
 
 Estacion.hasMany(Conector, { foreignKey: 'id_estacion', as: 'conectores' });
 Conector.belongsTo(Estacion, { foreignKey: 'id_estacion', as: 'estacion' });
