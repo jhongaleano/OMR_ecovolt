@@ -34,8 +34,6 @@ const Estacion = sequelize.define('Estacion', {
         allowNull: false,
         validate: {
             min: 0,
-            
-            // VALIDADOR PERSONALIZADO PARA EL PRECIO ABSURDO
             noCambioAbsurdo(nuevoPrecio) {
 
                 const precioAnterior = this.previous('precioKw');

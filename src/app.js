@@ -13,7 +13,7 @@ app.use(express.json());
 async function startServer() {
     try {
         console.log('Conectandose a la BD...')
-        await sequelize.sync({ alter:true });
+        await sequelize.sync({ force:true });
         console.log('Modelos se actualizaron correctamente');
 
         app.listen(PORT, () => {

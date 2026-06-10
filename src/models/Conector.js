@@ -24,8 +24,8 @@ const Conector = sequelize.define('Conector', {
     }
 }, {
         timestamps: true,
-        paranoid: true, // Crear el campo deleted_at
-        tableName: 'conectores' // En plural y en minusculas
+        paranoid: true,
+        tableName: 'conectores'
     });
 
 

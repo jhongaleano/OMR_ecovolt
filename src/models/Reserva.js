@@ -1,6 +1,3 @@
-
-
-
 const { DataTypes } = require('sequelize');
 const sequelize = require('../../Config/database');
 
@@ -12,10 +9,6 @@ const Reserva = sequelize.define('Reserva', {
         primaryKey: true
     },
     id_usuario: {
-        type: DataTypes.UUID,
-        allowNull: false
-    },
-    id_estacion: {
         type: DataTypes.UUID,
         allowNull: false
     },
@@ -42,8 +35,8 @@ const Reserva = sequelize.define('Reserva', {
     },
 }, {
         timestamps: true,
-        paranoid: true, // Crear el campo deleted_at
-        tableName: 'reservas' // En plural y en minusculas
+        paranoid: true,
+        tableName: 'reservas'
     });
 
 module.exports = Reserva;
